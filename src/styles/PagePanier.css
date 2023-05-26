@@ -1,0 +1,19 @@
+.page-panier {
+    flex-direction: row;
+    padding: 10px;
+    font-size: 20px;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+}
+
+h1 {
+  color: #2c3e50;
+  text-align: center;
+}
