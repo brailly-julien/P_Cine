@@ -12,7 +12,7 @@
         </div>
       
         <div class="CinemaSetup-options">
-        <router-link to="/pagerestauration">
+        <router-link to="/pagelangue">
             <button class="CinemaSetup-option">Langues</button>
         </router-link>
         <router-link to="/pagerestauration">

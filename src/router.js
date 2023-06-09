@@ -5,6 +5,7 @@ import CinemaMenu from './components/CinemaMenu.vue'
 import PageRestauration from './components/PageRestauration.vue'
 import PageSetup from './components/PageSetup.vue'
 import PagePanier from './components/PagePanier'
+import PageLangue from './components/PageLangue.vue'
 
 const routes = [
   { path: '/', component: PageAccueil },
@@ -13,6 +14,7 @@ const routes = [
   { path: '/pagerestauration', component: PageRestauration },
   { path: '/pagesetup', component: PageSetup },
   { path: '/pagepanier', component: PagePanier },
+  { path: '/pagelangue', component: PageLangue },
 ]
 
 const router = createRouter({

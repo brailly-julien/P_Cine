@@ -9,13 +9,13 @@
 
     <h1>Restauration</h1>
 
-    <h2>Pizzas</h2>
+    <img src="../assets/pizza.png" alt="Drink" class="menu-img"/>
     <button @click="commander('pizza')">Commander une pizza</button>
 
     <img src="../assets/drink.png" alt="Drink" class="menu-img"/>
     <button @click="commander('boisson')">Commander une boisson</button>
 
-    <h2>Popcorn</h2>
+    <img src="../assets/popcorn.png" alt="Popcorn" class="menu-img"/>
     <button @click="commander('popcorn')">Commander du popcorn</button>
 
   </div>
