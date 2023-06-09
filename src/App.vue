@@ -16,6 +16,19 @@ export default {
 </script>
 
 <style>
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: auto; /* Assurez-vous que le contenu débordant peut toujours être accessible */
+}
+
+/* Ensuite, assurez-vous que votre conteneur d'application prend toute la hauteur disponible */
+#app {
+  min-height: 100%;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
