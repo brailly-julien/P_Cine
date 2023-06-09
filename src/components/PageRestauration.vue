@@ -9,27 +9,51 @@
 
     <h1>Restauration</h1>
 
-    <img src="../assets/pizza.png" alt="Drink" class="menu-img"/>
-    <button @click="commander('pizza')">Commander une pizza</button>
+    <div class="menu-container">
+      <div class="item-container">
+        <img src="../assets/pizza.png" alt="Pizza" class="menu-img" @click="commander('pizza')"/>
+        <button @click="commander('pizza')">Commander une pizza</button>
+      </div>
 
-    <img src="../assets/drink.png" alt="Drink" class="menu-img"/>
-    <button @click="commander('boisson')">Commander une boisson</button>
+      <div class="item-container">
+        <img src="../assets/drink.png" alt="Drink" class="menu-img" @click="commander('boisson')"/>
+        <button @click="commander('boisson')">Commander une boisson</button>
+      </div>
 
-    <img src="../assets/popcorn.png" alt="Popcorn" class="menu-img"/>
-    <button @click="commander('popcorn')">Commander du popcorn</button>
+      <div class="item-container">
+        <img src="../assets/popcorn.png" alt="Popcorn" class="menu-img" @click="commander('popcorn')"/>
+        <button @click="commander('popcorn')">Commander du popcorn</button>
+      </div>
+    </div>
 
   </div>
 </template>
+
 
 <script>
 
 export default {
   name: 'PageRestauration',
+  data() {
+    return {
+      prices: {
+        pizza: 10,
+        boisson: 5,
+        popcorn: 7
+      }
+    }
+  },
   methods: {
     commander(type) {
-      // Ici vous pouvez ajouter le code pour enregistrer la commande
-      this.$store.dispatch('addToCart', type);
-      console.log(`Vous avez commandé ${type}`);
+      const item = {
+        type: type,
+        image: `../assets/${type}.png`,
+        price: this.prices[type], // Use the price from the prices object
+        quantity: 1
+      };
+
+      this.$store.commit('addToCart', item);
+      console.log(`Vous avez commandé ${type}, at ${this.prices[type]}`);
     },
   },
 };
