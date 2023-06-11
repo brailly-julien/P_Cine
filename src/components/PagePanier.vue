@@ -21,7 +21,7 @@
     </div>
   </li>
 </ul>
-
+<button class="order-button" @click="order">Commander</button>
 </template>
 
 <script>
@@ -35,6 +35,10 @@ export default {
   methods: {
     removeFromCart(item) {
       this.$store.dispatch('removeFromCart', item);
+    },
+    order() {
+    this.$store.commit('clearCart');  // vider le panier
+    console.log("Commande envoyée en cuisine");  // afficher le message dans la console
     },
   },
 }

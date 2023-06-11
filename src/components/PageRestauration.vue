@@ -16,7 +16,7 @@
       </div>
 
       <div class="item-container">
-        <img src="../assets/drink.png" alt="Drink" class="menu-img" @click="commander('boisson')"/>
+        <img src="../assets/boisson.png" alt="Boisson" class="menu-img" @click="commander('boisson')"/>
         <button @click="commander('boisson')">Commander une boisson</button>
       </div>
 
@@ -47,7 +47,7 @@ export default {
     commander(type) {
       const item = {
         type: type,
-        image: `../assets/${type}.png`,
+        image: require(`../assets/${type}.png`),
         price: this.prices[type], // Use the price from the prices object
         quantity: 1
       };
