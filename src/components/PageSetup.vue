@@ -15,13 +15,13 @@
         <router-link to="/pagelangue">
             <button class="CinemaSetup-option">Langues</button>
         </router-link>
-        <router-link to="/pagerestauration">
+        <router-link to="/pagesetup">
             <button class="CinemaSetup-option">Siège</button>
         </router-link>
-        <router-link to="/pagerestauration">
+        <router-link to="/pageson">
             <button class="CinemaSetup-option">Son</button>
         </router-link>
-        <router-link to="/pagerestauration">
+        <router-link to="/pagesetup">
             <button class="CinemaSetup-option">Autres</button>
         </router-link>
         </div>

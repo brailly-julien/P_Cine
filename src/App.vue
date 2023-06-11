@@ -47,7 +47,7 @@ html, body {
 }
 
 .container {
-  padding: 50px;
+  padding: 25px;
   background-color: #becfdd;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);

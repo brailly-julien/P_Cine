@@ -6,6 +6,7 @@ import PageRestauration from './components/PageRestauration.vue'
 import PageSetup from './components/PageSetup.vue'
 import PagePanier from './components/PagePanier'
 import PageLangue from './components/PageLangue.vue'
+import PageSon from './components/PageSon.vue'
 
 const routes = [
   { path: '/', component: PageAccueil },
@@ -15,6 +16,7 @@ const routes = [
   { path: '/pagesetup', component: PageSetup },
   { path: '/pagepanier', component: PagePanier },
   { path: '/pagelangue', component: PageLangue },
+  { path: '/pageson', component: PageSon },
 ]
 
 const router = createRouter({
