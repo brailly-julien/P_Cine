@@ -1,0 +1,20 @@
+[
+{
+    "id" : 1,
+    "firstname": "Prenom1",
+    "lastname": "Nom1",
+    "pseudo": "Pseudo1", 
+    "mail": "mail.test@gmail.com", 
+    "soundProfile": "Stereo", 
+    "language": "fr"
+},
+{
+    "id" : 2,
+    "firstname": "Prenom2",
+    "lastname": "Nom2",
+    "pseudo": "Pseudo2", 
+    "mail": "mail.test@gmail.com", 
+    "soundProfile": "Stereo", 
+    "language": "fr"
+}
+]

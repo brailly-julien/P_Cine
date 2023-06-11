@@ -1,0 +1,13 @@
+[
+    {
+        "id" : 1,
+        "name": "marguerita",
+        "type": "pizza"
+    },
+    {
+        "id" : 2,
+        "name": "coca-cola", 
+        "type": "boisson"
+    }
+]
+    
