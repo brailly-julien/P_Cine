@@ -55,6 +55,7 @@ export default {
       this.$store.commit('addToCart', item);
       console.log(`Vous avez commandé ${type}, at ${this.prices[type]}`);
     },
+    
   },
 };
 </script>
