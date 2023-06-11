@@ -21,7 +21,8 @@
     </div>
   </li>
 </ul>
-<button class="order-button" @click="order">Commander</button>
+<button class="order-button" @click="order" :disabled="isCartEmpty">Commander</button>
+
 </template>
 
 <script>
@@ -31,14 +32,17 @@ export default {
     cartItems() {
       return this.$store.state.cart;
     },
+    isCartEmpty() {
+    return this.cartItems.length === 0;
+  },
   },
   methods: {
     removeFromCart(item) {
       this.$store.dispatch('removeFromCart', item);
     },
     order() {
+    console.log("Commande envoyée en cuisine");
     this.$store.commit('clearCart');  // vider le panier
-    console.log("Commande envoyée en cuisine");  // afficher le message dans la console
     },
   },
 }
