@@ -17,3 +17,48 @@ h1 {
   color: #2c3e50;
   text-align: center;
 }
+.cart-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* optional, to center item contents vertically */
+  width: 200px; /* adjust as needed */
+  margin: 10px; /* adjust as needed */
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* optional, to center text vertically */
+}
+
+.item-image img {
+  width: 100%; /* adjust as needed */
+  height: auto;
+}
+
+.order-button {
+  display: block;
+  width: 200px;
+  height: 50px;
+  margin: 20px auto;
+  background-color: #2c3e50;  /* change this to your desired color */
+  color: white;  /* change this to your desired color */
+  border-radius: 25px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-button:hover {
+  background-color: #1a242f;  /* change this to your desired color */
+}
+

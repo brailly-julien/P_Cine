@@ -39,6 +39,10 @@ export const store = createStore({
       if (found) {
         found.quantity = quantity
       }
+    },
+
+    clearCart(state) {
+      state.cart = [];
     }
   },
   actions: {
