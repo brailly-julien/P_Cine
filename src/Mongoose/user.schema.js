@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    id : { type: number, required: true, unique: true},
+    id : { type: String, required: true, unique: true},
 	firstname : { type: String, required: true },
 	lastname: { type: String, required: true},
 	pseudo : { type: Number, required: true },
