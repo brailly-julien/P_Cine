@@ -1,71 +1,40 @@
 <template>
   <div class="page-accueil">
-    <h1>Bienvenue dans le cinéma !</h1>
-      <router-link to="/signup">
-          <button class="button">Se connecter</button>
-      </router-link>
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Firstname</th>
-              <th>Nom</th>
-              <th>pseudo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="user in users" :key="user.id">
-              <td>{{ user.id }}</td>
-              <td>{{ user.firstname }}</td>
-              <td>{{ user.lastname }}</td>
-              <td>{{ user.pseudo }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Id user</th>
-              <th>Id movie</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="seat in seats" :key="seat.id">
-              <td>{{ seat.id }}</td>
-              <td>{{ seat.id_user }}</td>
-              <td>{{ seat.id_movie }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    <SignUp v-if="showSignUp" />
+    <h1>Bienvenue dans le cinéma !</h1> 
+    <h2>Veuillez scanner votre QR code, à l'aide <br>du boitier situé devant vous.</h2> 
   </div>
 </template>
 
 <script>
-import SignUp from './SignUp.vue'
 import axios from 'axios';
 import { io } from "socket.io-client";
 
 export default {
   name: 'PageAccueil',
-  components: {
-    SignUp
-  },
 
   data() {
     return {
-      showSignUp: false,
       message: '',
       users: [],
       seats: [],
       socket: null
     };
   },
+
+  watch: {
+    seats: {
+      handler(newSeats) {
+        for (let seat of newSeats) {
+          if (seat.id_user && seat.id_movie && seat.id == '13B') {
+            this.$router.push('/CinemaMenu'); // Remplacez '/newPage' par l'URL de la page vers laquelle vous voulez naviguer.
+            break;
+          }
+        }
+      },
+      deep: true,
+    },
+  },
+
 
   async created() {
     try {
@@ -79,8 +48,9 @@ export default {
     console.log("before socket");
     this.socket = io("http://localhost:3000");
     
-    this.socket.on("users", (users) => {
-      this.users = users;
+    this.socket.on("usersChanged", (newUsers) => {
+      console.log(newUsers);
+      this.users = newUsers;
     });
     this.socket.on("seatsChanged", (newSeats) => {
       console.log(newSeats);

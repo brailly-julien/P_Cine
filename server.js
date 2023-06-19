@@ -29,12 +29,20 @@ db.on('error', console.error.bind(console, 'Erreur de connexion :'));
 db.once('open', function() {
   console.log("Connecté à la base de données MongoDB!");
 
-  const changeStream = Seat.watch();
-  changeStream.on('change', async (change) => {
-    console.log('A change occurred:', change);
+  const SeatchangeStream = Seat.watch();
+  SeatchangeStream.on('change', async (change) => {
+    console.log('A change occurred seat :', change);
 
     const seats = await Seat.find().select('id id_user id_movie -_id');
     io.emit('seatsChanged', seats);
+  });
+
+  const UserchangeStream = User.watch();
+  UserchangeStream.on('change', async (change) => {
+    console.log('A change occurred user :', change);
+
+    const users = await User.find().select('id firstname lastname pseudo -_id');
+    io.emit('usersChanged', users);
   });
 
 });
@@ -72,23 +80,3 @@ app.get('/seats', async (req, res) => {
   server.listen(port, () => {
       console.log(`Server is running on port ${port}`);
   });
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
