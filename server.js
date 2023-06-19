@@ -5,6 +5,16 @@ const app = express();
 const http = require('http');
 const { Server } = require('socket.io');
 
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*", // remplacer par l'URL de votre application Vue.js
+    methods: ["GET", "POST"]
+  }
+});
+
+app.use(cors());
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -12,7 +22,7 @@ app.use(function(req, res, next) {
   });
 
 // Configuration Mongoose
-mongoose.connect('mongodb+srv://dbUser:dbPassword@cluster0.6ml5yl4.mongodb.net/', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://dbUser:dbPassword@cluster0.6ml5yl4.mongodb.net/IotProject', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur de connexion :'));
@@ -24,7 +34,7 @@ db.once('open', function() {
     console.log('A change occurred:', change);
 
     const seats = await Seat.find().select('id id_user id_movie -_id');
-    io.emit('seats', seats);
+    io.emit('seatsChanged', seats);
   });
 
 });
@@ -56,14 +66,29 @@ app.get('/seats', async (req, res) => {
     }
 });
 
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:8080/", // remplacer par l'URL de votre application Vue.js
-    methods: ["GET", "POST"]
-  }
-});
 
-app.listen(3000, function() {
-    console.log('Serveur en cours d\'exécution sur le port 3000');
+
+  const port = 3000;
+  server.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
   });
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

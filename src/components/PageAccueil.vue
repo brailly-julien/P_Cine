@@ -63,11 +63,13 @@ export default {
       message: '',
       users: [],
       seats: [],
-    }
+      socket: null
+    };
   },
 
   async created() {
     try {
+      console.log("ejiejeijeiej");
         const response = await axios.get('http://localhost:3000/users');
         const response2 = await axios.get('http://localhost:3000/seats');
         this.users = response.data;
@@ -75,17 +77,17 @@ export default {
     } catch (err) {
         console.error(err);
     }
-
+    console.log("before socket");
     this.socket = io("http://localhost:3000");
-    this.socket.on("connect", () => {
-      console.log("connecté au serveur");
-    });
+    
     this.socket.on("users", (users) => {
       this.users = users;
     });
-    this.socket.on("seats", (seats) => {
-      this.seats = seats;
+    this.socket.on("seatsChanged", (newSeats) => {
+      console.log(newSeats);
+      this.seats = newSeats;
     });
+
   },
 
   beforeUnmount() {
