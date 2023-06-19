@@ -69,7 +69,6 @@ export default {
 
   async created() {
     try {
-      console.log("ejiejeijeiej");
         const response = await axios.get('http://localhost:3000/users');
         const response2 = await axios.get('http://localhost:3000/seats');
         this.users = response.data;
