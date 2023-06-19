@@ -5,7 +5,20 @@
           <button class="button">Se connecter</button>
       </router-link>
       <div>
-        <p>{{ message }}</p>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Firstname</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="user in users" :key="user.id">
+              <td>{{ user.id }}</td>
+              <td>{{ user.firstname }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     <SignUp v-if="showSignUp" />
   </div>
@@ -20,16 +33,22 @@ export default {
   components: {
     SignUp
   },
+
   data() {
     return {
       showSignUp: false,
       message: '',
+      users: [],
     }
   },
 
   async created() {
-    const response = await axios.get('http://localhost:3000');
-    this.message = response.data;
+    try {
+        const response = await axios.get('http://localhost:3000/users');
+        this.users = response.data;
+    } catch (err) {
+        console.error(err);
+    }
   },
 
   methods: {
