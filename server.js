@@ -12,7 +12,7 @@ app.use(function(req, res, next) {
   });
 
 // Configuration Mongoose
-mongoose.connect('mongodb+srv://dbUser:dbPassword@serverlessinstanceiottp.ygpm5nj.mongodb.net/IotProject', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://dbUser:dbPassword@cluster0.6ml5yl4.mongodb.net/', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur de connexion :'));
