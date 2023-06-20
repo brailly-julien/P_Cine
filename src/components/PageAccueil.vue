@@ -17,7 +17,8 @@ export default {
       message: '',
       users: [],
       seats: [],
-      socket: null
+      socket: null,
+      token: null
     };
   },
 
@@ -55,6 +56,12 @@ export default {
     this.socket.on("seatsChanged", (newSeats) => {
       console.log(newSeats);
       this.seats = newSeats;
+    });
+
+    this.socket.on('tokenGenerated', (token) => {
+      this.token = token;
+      localStorage.setItem('jwtToken', token);
+      console.log(this.token);
     });
 
   },

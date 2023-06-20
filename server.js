@@ -5,6 +5,7 @@ const app = express();
 const http = require('http');
 const { Server } = require('socket.io');
 
+const jwt = require('jsonwebtoken');
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -35,6 +36,26 @@ db.once('open', function() {
 
     const seats = await Seat.find().select('id id_user id_movie -_id');
     io.emit('seatsChanged', seats);
+
+    
+    const seat = await Seat.findById(change.documentKey._id);
+    const movies= db.collection('movies');
+    var tokenduration; 
+
+    const movie = await movies.findOne({ id: seat.id_movie });
+     tokenduration = movie.length;
+    
+    if (seat && seat.id_user != null && seat.id_movie != null) {
+      const tokenDurationInSeconds = tokenduration * 60;
+      const token = jwt.sign({
+        id: seat._id,
+        id_user: seat.id_user,
+        id_movie: seat.id_movie,
+      }, 'your_secret_key', { expiresIn: tokenDurationInSeconds });
+      console.log("before second emit");
+      io.sockets.emit('tokenGenerated', token);
+    }
+
   });
 
   const UserchangeStream = User.watch();
@@ -43,6 +64,9 @@ db.once('open', function() {
 
     const users = await User.find().select('id firstname lastname pseudo -_id');
     io.emit('usersChanged', users);
+
+
+    
   });
 
 });
@@ -50,6 +74,8 @@ db.once('open', function() {
 // Définition des modèles
 const User = mongoose.model('User', new mongoose.Schema({ id: String, firstname: String, lastname: String, pseudo: String}));
 const Seat = mongoose.model('Seat', new mongoose.Schema({ id: String, id_user: String, id_movie: String}));
+const Movie = mongoose.model('Movie', new mongoose.Schema({ id: String, name: String, length: Number}));
+
 
 app.get('/', (req, res) => {
     res.send('<h1>Bienvenue sur votre application web Node.js</h1>');
@@ -72,6 +98,14 @@ app.get('/seats', async (req, res) => {
     } catch (err) {
         res.status(500).send(err);
     }
+});
+app.get('/movies', async (req, res) => {
+  try {
+      const movies = await Movie.find().select('id name length -_id'); // récupérer les champs
+      res.send(movies);
+  } catch (err) {
+      res.status(500).send(err);
+  }
 });
 
 
