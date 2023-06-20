@@ -40,10 +40,9 @@ db.once('open', function() {
     
     const seat = await Seat.findById(change.documentKey._id);
     const movies= db.collection('movies');
-    var tokenduration; 
 
     const movie = await movies.findOne({ id: seat.id_movie });
-     tokenduration = movie.length;
+    const tokenduration = movie.length;
     
     if (seat && seat.id_user != null && seat.id_movie != null) {
       const tokenDurationInSeconds = tokenduration * 60;
