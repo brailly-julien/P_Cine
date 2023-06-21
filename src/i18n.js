@@ -10,7 +10,6 @@ const messages = {
     whattodo: 'What do you want to do?',
     command: 'Order',
     setup: 'Setup',
-
     french: 'French',
     english: 'English',
     spanish: 'Spanish',
@@ -34,6 +33,10 @@ const messages = {
     seat: 'Seat',
     sound: 'Sound',
     others: 'Others',
+    soundModifier: 'Sound Modifier',
+    bass: 'Bass',
+    low: 'Low',
+    high: 'High',
   },
   fr: {
     welcome: 'Bonjour,',
@@ -43,7 +46,6 @@ const messages = {
     scanqr2: 'du boitier situé devant vous.',
     whattodo: 'Que souhaitez-vous faire ?',
     setup:'Réglage',
-
     french: 'Français',
     english: 'Anglais',
     spanish: 'Espagnol',
@@ -52,7 +54,6 @@ const messages = {
     portuguese: 'Portugais',
     chooseLanguage: 'Choisissez votre langue',
     return: 'Retour',
-    cart: 'Panier',
     quantity: 'Quantité',
     price: 'Prix',
     remove: 'Supprimer',
@@ -68,6 +69,10 @@ const messages = {
     seat: 'Siège',
     sound: 'Son',
     others: 'Autres',
+    soundModifier: 'Modificateur son',
+    bass: 'Basse',
+    low: 'Grave',
+    high: 'Aigu',
   },
 };
 

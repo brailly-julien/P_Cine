@@ -71,7 +71,14 @@ export default {
 }
 </script>
 
+
 <style>
+
+.lang-switch {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 
 html, body {
   margin: 0;

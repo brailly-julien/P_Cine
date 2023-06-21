@@ -1,26 +1,25 @@
 <template>
     <div class="page-son">
         <router-link to="/PageSetup">
-            <img src="../assets/back.png" alt="Retour" class="back-button"/>
+            <img src="../assets/back.png" alt="{{ $t('return') }}" class="back-button"/>
         </router-link> 
-        <h1>Modificateur son</h1>
+        <h1>{{ $t('soundModifier') }}</h1>
   
         <div class="control">
-            <label for="slider">Basse :</label>
+            <label for="slider">{{ $t('bass') }} :</label>
             <input id="slider" type="range" v-model="sliderValue1" min="0" max="100"/>
             <span>{{ sliderValue1 }}</span>
         </div>
         <div class="control">
-            <label for="slider">Grave :</label>
+            <label for="slider">{{ $t('low') }} :</label>
             <input id="slider" type="range" v-model="sliderValue2" min="0" max="100"/>
             <span>{{ sliderValue2 }}</span>
         </div>
         <div class="control">
-            <label for="slider">Aigu :</label>
+            <label for="slider">{{ $t('high') }} :</label>
             <input id="slider" type="range" v-model="sliderValue3" min="0" max="100"/>
             <span>{{ sliderValue3 }}</span>
         </div>
-
     </div>
 </template>
   
