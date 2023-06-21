@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import SeatPage from './components/SeatPage.vue'
 import PageAccueil from './components/PageAccueil.vue'
 import SignUp from './components/SignUp.vue'
 import CinemaMenu from './components/CinemaMenu.vue'
@@ -9,7 +10,8 @@ import PageLangue from './components/PageLangue.vue'
 import PageSon from './components/PageSon.vue'
 
 const routes = [
-  { path: '/', component: PageAccueil },
+  { path: '/', component: SeatPage },
+  { path: '/pageacceuil', component: PageAccueil },
   { path: '/signup', component: SignUp },
   { path: '/cinemamenu', component: CinemaMenu },
   { path: '/pagerestauration', component: PageRestauration },

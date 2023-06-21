@@ -1,6 +1,6 @@
 <template>
   <div class="page-accueil">
-    <h1>Bienvenue dans le cinéma !</h1> 
+    <h1>Bienvenue sur le siege {{ chair }} !</h1> 
     <h2>Veuillez scanner votre QR code, à l'aide <br>du boitier situé devant vous.</h2> 
   </div>
 </template>
@@ -18,7 +18,8 @@ export default {
       users: [],
       seats: [],
       socket: null,
-      token: null
+      token: null,
+      chair:'',
     };
   },
 
@@ -26,7 +27,7 @@ export default {
     seats: {
       handler(newSeats) {
         for (let seat of newSeats) {
-          if (seat.id_user && seat.id_movie && seat.id == '13B') {
+          if (seat.id_user && seat.id_movie && seat.id == this.chair) {
             this.$router.push('/CinemaMenu'); // Remplacez '/newPage' par l'URL de la page vers laquelle vous voulez naviguer.
             break;
           }
@@ -64,6 +65,10 @@ export default {
       console.log(this.token);
     });
 
+  },
+
+  mounted() {
+    this.chair = localStorage.getItem('chosenSeat');
   },
 
   beforeUnmount() {

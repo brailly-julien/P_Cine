@@ -1,0 +1,19 @@
+h1 {
+  color: #2c3e50;
+}
+
+.page-sieges {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  /* adjust this value for the space between buttons */
+  margin-bottom: 20px;
+  /* adjust this value for the space between rows */
+}
