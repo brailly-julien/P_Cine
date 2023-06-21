@@ -89,7 +89,7 @@ db.once('open', function() {
 });
 
 // Définition des modèles
-const User = mongoose.model('User', new mongoose.Schema({ id: String, firstname: String, lastname: String, pseudo: String, mail: String, soundProfile: String, language: String, volume: String}));
+const User = mongoose.model('User', new mongoose.Schema({ id: String, firstname: String, lastname: String, pseudo: String, mail: String, soundProfile: String, language: String, volume: String, basse: Number, aigu: Number, grave: Number}));
 const Seat = mongoose.model('Seat', new mongoose.Schema({ id: String, id_user: String, id_movie: String}));
 const Movie = mongoose.model('Movie', new mongoose.Schema({ id: String, name: String, length: Number}));
 
@@ -132,6 +132,17 @@ app.put('/user/:id', async (req, res) => {
           console.log(`Langue de l'utilisateur mis à jour: `, user.language);
       }
 
+      if (req.body.grave !== undefined) {
+        user.grave = req.body.grave;
+    }
+    if (req.body.aigu !== undefined) {
+      user.aigu= req.body.aigu;
+  }
+  if (req.body.basse !== undefined) {
+    user.basse = req.body.basse;
+}
+      
+
       await user.save();
       console.log(`Utilisateur enregistré: `, user);
       res.send(user);
@@ -173,13 +184,10 @@ app.get('/seat/:id', async (req, res) => {
       res.status(500).send(err);
   }
 });
-<<<<<<< Updated upstream
-=======
 
 
 
 
->>>>>>> Stashed changes
   const port = 3000;
   server.listen(port, '0.0.0.0', () => {
       console.log(`Server is running on port ${port}`);

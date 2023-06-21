@@ -25,15 +25,46 @@
 </template>
   
   <script>
+
+   import axios from 'axios';
   export default {
     name: 'PageSon',
     data() {
       return {
-        sliderValue1: 50,
-        sliderValue2: 75,
-        sliderValue3: 25,
+        sliderValue1: 0,
+        sliderValue2: 0,
+        sliderValue3: 0,
       }
-    }
+    },
+
+    async created() {
+    try {
+        const response = await axios.get('http://localhost:3000/seat/13B');
+        this.user = response.data;
+        this.userid = this.user.id;
+        this.sliderValue1 = this.user.basse;  
+        this.sliderValue2 = this.user.grave;  
+        this.sliderValue3 = this.user.aigu;  
+    } catch (error) {
+        console.error(error);
+        }
+    },
+
+    methods: {
+        async updateSliders() {
+            try {
+                await axios.put(`http://localhost:3000/user/${this.user.id}`, {
+                    basse: this.sliderValue1.toString()
+                    grave: this.sliderValue2.toString()
+                    aigu: this.sliderValue3.toString()
+                });
+                console.log('Paramètre son mis à jour avec succès pour l'utilisateur ${this.user.id}`);
+            } catch (error) {
+                console.error(error);
+            }
+        },
+    },
+    
   }
   </script>
   
