@@ -70,12 +70,20 @@
     }
   },
     methods: {
-      setLanguage(language) {
-        this.selectedLanguage = language;
-        console.log(`La langue du film a été modifiée en ${language}`);
-      },
+      async setLanguage(language) {
+        try {
+          console.log(`Mise à jour de la langue pour l'utilisateur ${this.user.id} à ${language}`); 
+          await axios.put(`http://localhost:3000/user/${this.user.id}`, {
+            language: language
+          });
+          console.log(`La langue a été mise à jour avec succès pour l'utilisateur ${this.user.id}`);
+          this.selectedLanguage = language; // Met à jour la valeur de la langue sélectionnée dans le composant Vue.js
+        } catch (error) {
+          console.error(error);
+      }
     },
-  };
+  },
+};
   </script>
   
   <style src="../styles/PageLangue.css" lang="css"></style>

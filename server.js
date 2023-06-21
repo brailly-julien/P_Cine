@@ -93,16 +93,28 @@ app.get('/users', async (req, res) => {
 
 app.put('/user/:id', async (req, res) => {
   try {
-      console.log(`Requête reçue pour mettre à jour l'utilisateur ${req.params.id}, avec la valeur ${req.body.volume}`);
+      console.log(`Requête reçue pour mettre à jour l'utilisateur ${req.params.id}`);
       const user = await User.findOne({ id: req.params.id });
       console.log(`Utilisateur trouvé: `, user);
       if (!user) {
           return res.status(404).send('Utilisateur non trouvé');
       }
-      console.log(`Type du volume de l'utilisateur avant la mise à jour: ${typeof user.volume}`);
-      user.volume = req.body.volume;
-      console.log(`Volume de l'utilisateur mis à jour: `, user.volume);
-      console.log(`Type du volume de l'utilisateur après la mise à jour: ${typeof user.volume}`);
+
+      // Mise à jour du volume si présent dans la requête
+      if (req.body.volume !== undefined) {
+          console.log(`Type du volume de l'utilisateur avant la mise à jour: ${typeof user.volume}`);
+          user.volume = req.body.volume;
+          console.log(`Volume de l'utilisateur mis à jour: `, user.volume);
+          console.log(`Type du volume de l'utilisateur après la mise à jour: ${typeof user.volume}`);
+      }
+
+      // Mise à jour de la langue si présent dans la requête
+      if (req.body.language !== undefined) {
+          console.log(`Langue de l'utilisateur avant la mise à jour: ${user.language}`);
+          user.language = req.body.language;
+          console.log(`Langue de l'utilisateur mis à jour: `, user.language);
+      }
+
       await user.save();
       console.log(`Utilisateur enregistré: `, user);
       res.send(user);
@@ -111,6 +123,7 @@ app.put('/user/:id', async (req, res) => {
       res.status(500).send(err);
   }
 });
+
 
 
 
