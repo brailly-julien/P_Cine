@@ -53,3 +53,8 @@ button {
 .menu-img {
   height: 60%;
 }
+
+.clicked {
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+}
