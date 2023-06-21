@@ -49,6 +49,9 @@
         console.error(error);
         }
     },
+    beforeUnmount() {
+      this.updateSliders();
+    },
 
     methods: {
         async updateSliders() {
