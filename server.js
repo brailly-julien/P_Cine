@@ -16,11 +16,12 @@ const io = new Server(server, {
 });
 
 app.use(cors());
+app.use(express.json()); // Ajouter cette ligne
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
-  });
+});
 
 // Configuration Mongoose
 mongoose.connect('mongodb+srv://dbUser:dbPassword@cluster0.6ml5yl4.mongodb.net/IotProject', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -71,7 +72,7 @@ db.once('open', function() {
 });
 
 // Définition des modèles
-const User = mongoose.model('User', new mongoose.Schema({ id: String, firstname: String, lastname: String, pseudo: String}));
+const User = mongoose.model('User', new mongoose.Schema({ id: String, firstname: String, lastname: String, pseudo: String, mail: String, soundProfile: String, language: String, volume: String}));
 const Seat = mongoose.model('Seat', new mongoose.Schema({ id: String, id_user: String, id_movie: String}));
 const Movie = mongoose.model('Movie', new mongoose.Schema({ id: String, name: String, length: Number}));
 
@@ -89,6 +90,31 @@ app.get('/users', async (req, res) => {
         res.status(500).send(err);
     }
 });
+
+app.put('/user/:id', async (req, res) => {
+  try {
+      console.log(`Requête reçue pour mettre à jour l'utilisateur ${req.params.id}, avec la valeur ${req.body.volume}`);
+      const user = await User.findOne({ id: req.params.id });
+      console.log(`Utilisateur trouvé: `, user);
+      if (!user) {
+          return res.status(404).send('Utilisateur non trouvé');
+      }
+      console.log(`Type du volume de l'utilisateur avant la mise à jour: ${typeof user.volume}`);
+      user.volume = req.body.volume;
+      console.log(`Volume de l'utilisateur mis à jour: `, user.volume);
+      console.log(`Type du volume de l'utilisateur après la mise à jour: ${typeof user.volume}`);
+      await user.save();
+      console.log(`Utilisateur enregistré: `, user);
+      res.send(user);
+  } catch (err) {
+      console.log(`Erreur lors de la mise à jour de l'utilisateur: `, err);
+      res.status(500).send(err);
+  }
+});
+
+
+
+
 
 app.get('/seats', async (req, res) => {
     try {
@@ -120,6 +146,10 @@ app.get('/seat/:id', async (req, res) => {
       res.status(500).send(err);
   }
 });
+
+
+
+
 
 
 
