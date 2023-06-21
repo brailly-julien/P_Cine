@@ -4,6 +4,10 @@
       <router-link to="/">
         <img alt="Vue logo" src="./assets/logo2.png" class="logo">
       </router-link>
+      <div class="lang-switch">
+        <button @click="switchLocale('fr')">FR</button> |
+        <button @click="switchLocale('en')">EN</button>
+      </div>
       <router-view></router-view>
       <div v-if="tokenExpiresIn">
         Le token expire dans : {{ tokenExpiresIn }} secondes
@@ -24,6 +28,9 @@ export default {
     }
   },
   methods: {
+    switchLocale(locale) {
+      this.$i18n.locale = locale;
+    },
     logoutUser() {
       // Log the user out and reset tokenExpiresIn
       // Depending on your app's authentication, you may need to do more here
@@ -63,6 +70,7 @@ export default {
   }
 }
 </script>
+
 <style>
 
 html, body {

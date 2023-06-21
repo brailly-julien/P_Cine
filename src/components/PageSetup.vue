@@ -1,33 +1,33 @@
 <template>
     <div class="page-setup">
         <router-link to="/CinemaMenu">
-            <img src="../assets/back.png" alt="Retour" class="back-button"/>
+            <img src="../assets/back.png" alt="{{ $t('return') }}" class="back-button"/>
         </router-link> 
-        <h1>Page de configuration</h1>
+        <h1>{{ $t('setupPage') }}</h1>
   
         <div class="control">
-            <label for="slider">Volume :</label>
+            <label for="slider">{{ $t('volume') }} :</label>
             <input id="slider" type="range" v-model="sliderValue" min="0" max="100"/>
             <span>{{ sliderValue }}</span>
         </div>
       
         <div class="CinemaSetup-options">
-        <router-link to="/pagelangue">
-            <button class="CinemaSetup-option">Langues</button>
-        </router-link>
-        <router-link to="/pagesetup">
-            <button class="CinemaSetup-option">Siège</button>
-        </router-link>
-        <router-link to="/pageson">
-            <button class="CinemaSetup-option">Son</button>
-        </router-link>
-        <router-link to="/pagesetup">
-            <button class="CinemaSetup-option">Autres</button>
-        </router-link>
+            <router-link to="/pagelangue">
+                <button class="CinemaSetup-option">{{ $t('languages') }}</button>
+            </router-link>
+            <router-link to="/pagesetup">
+                <button class="CinemaSetup-option">{{ $t('seat') }}</button>
+            </router-link>
+            <router-link to="/pageson">
+                <button class="CinemaSetup-option">{{ $t('sound') }}</button>
+            </router-link>
+            <router-link to="/pagesetup">
+                <button class="CinemaSetup-option">{{ $t('others') }}</button>
+            </router-link>
         </div>
-
     </div>
 </template>
+
   
   <script>
   import axios from 'axios';
