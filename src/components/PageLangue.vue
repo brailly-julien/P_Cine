@@ -51,13 +51,26 @@
 </template>
   
   <script>
+  import axios from 'axios';
+
+
   export default {
     name: 'LanguageSelection',
     data() {
       return {
-      selectedLanguage: ''
+      selectedLanguage: '',
+      user: null
       }
     },
+    async created() {
+    try {
+      const response = await axios.get('http://localhost:3000/seat/13B');
+      this.user = response.data;
+      this.selectedLanguage = this.user.language;
+    } catch (error) {
+      console.error(error);
+    }
+  },
     methods: {
       setLanguage(language) {
         this.selectedLanguage = language;

@@ -107,6 +107,21 @@ app.get('/movies', async (req, res) => {
   }
 });
 
+app.get('/seat/:id', async (req, res) => {
+  try {
+      const seat = await Seat.findOne({ id: req.params.id }); // rechercher le siège par id
+      if (seat) {
+          const user = await User.findOne({ id: seat.id_user }); // rechercher l'utilisateur par id
+          res.send(user); // envoyer les informations de l'utilisateur
+      } else {
+          res.status(404).send('Seat not found');
+      }
+  } catch (err) {
+      res.status(500).send(err);
+  }
+});
+
+
 
 
   const port = 3000;
