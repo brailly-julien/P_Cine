@@ -57,11 +57,11 @@
         async updateSliders() {
             try {
                 await axios.put(`http://localhost:3000/user/${this.user.id}`, {
-                    basse: this.sliderValue1.toString()
-                    grave: this.sliderValue2.toString()
+                    basse: this.sliderValue1.toString(),
+                    grave: this.sliderValue2.toString(),
                     aigu: this.sliderValue3.toString()
                 });
-                console.log('Paramètre son mis à jour avec succès pour l'utilisateur ${this.user.id}`);
+                console.log(`Paramètre son mis à jour avec succès pour l'utilisateur ${this.user.id}`);
             } catch (error) {
                 console.error(error);
             }
