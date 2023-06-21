@@ -23,7 +23,7 @@
       </li>
     </ul>
 
-    <button class="order-button" @click="order" v-if="!isCartEmpty">Commander</button>
+    <button class="order-button" @click="order" v-if="!isCartEmpty">Commander pour {{ totalPrice }}€</button>
   </div>
 </template>
 
@@ -36,6 +36,9 @@ export default {
     },
     isCartEmpty() {
       return this.cartItems.length === 0;
+    },
+    totalPrice() {
+      return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     },
   },
   methods: {
