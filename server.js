@@ -41,21 +41,38 @@ db.once('open', function() {
     
     const seat = await Seat.findById(change.documentKey._id);
     const movies= db.collection('movies');
-
     const movie = await movies.findOne({ id: seat.id_movie });
-    const tokenduration = movie.length;
+    
+    
     
     if (seat && seat.id_user != null && seat.id_movie != null) {
-      const tokenDurationInSeconds = tokenduration * 60;
-      const token = jwt.sign({
-        id: seat._id,
-        id_user: seat.id_user,
-        id_movie: seat.id_movie,
-      }, 'your_secret_key', { expiresIn: tokenDurationInSeconds });
-      console.log("before second emit");
-      io.sockets.emit('tokenGenerated', token);
-    }
+      if (movie) { // Ajoutez cette ligne
+        const tokenduration = movie.length;
+        const tokenDurationInSeconds = tokenduration * 60;
+        const token = jwt.sign({
+          id: seat._id,
+          id_user: seat.id_user,
+          id_movie: seat.id_movie,
+        }, 'your_secret_key', { expiresIn: tokenDurationInSeconds });
+        console.log("before second emit");
+        io.sockets.emit('tokenGenerated', { token, expiresIn: tokenDurationInSeconds });
+        
+        setTimeout(async () => {
+          console.log('Token for seat ${seat.id} expired, resetting user and movie');
+          const seatToUpdate = await Seat.findOne({ id: seat.id });
+          if (seatToUpdate) {
+            seatToUpdate.id_user = null;
+            seatToUpdate.id_movie = null;
+            await seatToUpdate.save();
+          }
+        }, tokenDurationInSeconds * 1000); // Convertir les secondes en millisecondes pour setTimeout
 
+      }else {
+        // Si id_user ou id_movie est null, émettez un token expiré
+        const token = jwt.sign({}, 'your_secret_key', { expiresIn: 0 });
+        io.sockets.emit('tokenGenerated', { token, expiresIn: 0 });
+      }
+    }            
   });
 
   const UserchangeStream = User.watch();
@@ -159,14 +176,6 @@ app.get('/seat/:id', async (req, res) => {
       res.status(500).send(err);
   }
 });
-
-
-
-
-
-
-
-
   const port = 3000;
   server.listen(port, '0.0.0.0', () => {
       console.log(`Server is running on port ${port}`);

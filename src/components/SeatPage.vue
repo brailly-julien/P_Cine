@@ -21,7 +21,7 @@ export default {
   methods: {
     chooseSeat(seat) {
       localStorage.setItem('chosenSeat', seat);
-      this.$router.push('/pageacceuil');
+      this.$router.push('/pageaccueil');
     },
   }
 }

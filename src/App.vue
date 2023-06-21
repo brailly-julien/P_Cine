@@ -5,16 +5,64 @@
         <img alt="Vue logo" src="./assets/logo2.png" class="logo">
       </router-link>
       <router-view></router-view>
+      <div v-if="tokenExpiresIn">
+        Le token expire dans : {{ tokenExpiresIn }} secondes
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import io from 'socket.io-client';
+
 export default {
   name: 'App',
+  data() {
+    return {
+      tokenExpiresIn: null,
+      intervalId: null
+    }
+  },
+  methods: {
+    logoutUser() {
+      // Log the user out and reset tokenExpiresIn
+      // Depending on your app's authentication, you may need to do more here
+      this.tokenExpiresIn = null;
+      this.$router.push('/pageaccueil');  // navigate to the home page
+    },
+    startCountdown() {
+      // If an interval already exists, clear it
+      if (this.intervalId) {
+        clearInterval(this.intervalId);
+      }
+      // Start a new interval
+      this.intervalId = setInterval(() => {
+        if (this.tokenExpiresIn > 0) {
+          this.tokenExpiresIn -= 1;
+        } else {
+          this.logoutUser();
+          clearInterval(this.intervalId);
+        }
+      }, 1000);
+    }
+  },
+  created() {
+    const socket = io('http://localhost:3000'); // URL of your server
+
+    socket.on('tokenGenerated', data => {
+      // Store the token's valid duration in the component instance
+      this.tokenExpiresIn = data.expiresIn;
+      // Start the countdown
+      this.startCountdown();
+    })
+  },
+  beforeUnmount() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
 }
 </script>
-
 <style>
 
 html, body {

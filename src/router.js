@@ -11,7 +11,7 @@ import PageSon from './components/PageSon.vue'
 
 const routes = [
   { path: '/', component: SeatPage },
-  { path: '/pageacceuil', component: PageAccueil },
+  { path: '/pageaccueil', component: PageAccueil },
   { path: '/signup', component: SignUp },
   { path: '/cinemamenu', component: CinemaMenu },
   { path: '/pagerestauration', component: PageRestauration },
