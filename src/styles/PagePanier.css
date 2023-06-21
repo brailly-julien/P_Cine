@@ -1,5 +1,9 @@
 .page-panier {
     flex-direction: row;
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
     position: relative;
 }
 
@@ -27,7 +31,11 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center; /* optional, to center item contents vertically */
+<<<<<<< Updated upstream
   width: 30%; /* adjust as needed */
+=======
+  width: 50%; /* adjust as needed */
+>>>>>>> Stashed changes
 }
 
 .item-info {
@@ -36,7 +44,11 @@ h1 {
 }
 
 .item-image img {
+<<<<<<< Updated upstream
   width: 60%; /* adjust as needed */
+=======
+  width: 50%; /* adjust as needed */
+>>>>>>> Stashed changes
   height: auto;
 }
 

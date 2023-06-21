@@ -143,9 +143,6 @@ app.put('/user/:id', async (req, res) => {
 
 
 
-
-
-
 app.get('/seats', async (req, res) => {
     try {
         const seats = await Seat.find().select('id id_user id_movie -_id'); // récupérer les champs
@@ -176,6 +173,13 @@ app.get('/seat/:id', async (req, res) => {
       res.status(500).send(err);
   }
 });
+<<<<<<< Updated upstream
+=======
+
+
+
+
+>>>>>>> Stashed changes
   const port = 3000;
   server.listen(port, '0.0.0.0', () => {
       console.log(`Server is running on port ${port}`);
