@@ -1,6 +1,6 @@
 <template>
   <div class="page-sieges">
-    <h1>Choisissez votre siège</h1> 
+    <h1>{{ $t('chooseseat') }}</h1> 
     <div class="button-row">
     <button v-on:click="chooseSeat('11B')">11B</button>
     <button v-on:click="chooseSeat('13B')">13B</button>

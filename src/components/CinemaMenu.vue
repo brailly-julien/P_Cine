@@ -1,15 +1,15 @@
 <template>
   <div class="cinema-menu">
     <div v-if="user" class="user-info">
-      <h1>Bonjour, {{ user.firstname }} !</h1>
+      <h1>{{ $t('welcome') }} {{ user.firstname }} !</h1>
     </div>
-    <p>Que souhaitez-vous faire ?</p>
+    <p>{{ $t('whattodo') }}</p>
     <div class="CinemaMenu-options">
       <router-link to="/pagerestauration">
-        <button class="CinemaMenu-option">Commander</button>
+        <button class="CinemaMenu-option">{{ $t('order') }}</button>
       </router-link>
       <router-link to="/pagesetup">
-        <button class="CinemaMenu-option">Réglage</button>
+        <button class="CinemaMenu-option">{{ $t('setup') }}</button>
       </router-link>
       
     </div>

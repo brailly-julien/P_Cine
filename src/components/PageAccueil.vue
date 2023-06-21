@@ -1,7 +1,7 @@
 <template>
   <div class="page-accueil">
-    <h1>Bienvenue sur le siege {{ chair }} !</h1> 
-    <h2>Veuillez scanner votre QR code, à l'aide <br>du boitier situé devant vous.</h2> 
+    <h1>{{ $t('welcomeseat') }} {{ chair }} !</h1> 
+    <h2>{{ $t('scanqr') }} <br>{{ $t('scanqr2') }}</h2> 
   </div>
 </template>
 
