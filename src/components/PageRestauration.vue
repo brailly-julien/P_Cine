@@ -5,6 +5,7 @@
     </router-link>
     <router-link to="/pagepanier">
       <img src="../assets/cart.png" alt="Panier" class="panier-button"/>
+      <div class="panier-quantity" v-if="totalQuantity > 0">{{ totalQuantity }}</div>
     </router-link>
 
     <h1>Restauration</h1>
@@ -41,12 +42,23 @@ export default {
         boisson: 5,
         popcorn: 7
       },
-      clickedItem: null
+      clickedItem: null,
+      quantities: {
+        pizza: 0,
+        boisson: 0,
+        popcorn: 0
+      }
+    }
+  },
+  computed: {
+    totalQuantity() {
+      return this.$store.state.cart.reduce((total, item) => total + item.quantity, 0);
     }
   },
   methods: {
   commander(type) {
     this.clickedItem = type;
+    this.quantities[type] += 1;
     const item = {
       type: type,
       image: require(`../assets/${type}.png`),

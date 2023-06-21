@@ -13,7 +13,7 @@
       
         <div class="CinemaSetup-options">
         <router-link to="/pagelangue">
-            <button class="CinemaSetup-option">Langues</button>
+            <button class="CinemaSetup-option">Langue du Film</button>
         </router-link>
         <router-link to="/pagesetup">
             <button class="CinemaSetup-option">Siège</button>

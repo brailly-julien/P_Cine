@@ -1,9 +1,5 @@
 .page-panier {
     flex-direction: row;
-<<<<<<< Updated upstream
-=======
-    
->>>>>>> Stashed changes
     position: relative;
 }
 
@@ -19,6 +15,7 @@ h1 {
   color: #2c3e50;
   text-align: center;
 }
+
 .cart-list {
   display: flex;
   flex-direction: row;
@@ -31,11 +28,26 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center; /* optional, to center item contents vertically */
-<<<<<<< Updated upstream
   width: 30%; /* adjust as needed */
-=======
-  width: 50%; /* adjust as needed */
->>>>>>> Stashed changes
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Ajustez ceci en fonction de votre mise en page */
+}
+
+.quantity-controls button {
+  font-size: 12px;
+  /* ajuste la taille du texte */
+  width: 20px;
+  /* ajuste la largeur du bouton */
+  height: 20px;
+  /* ajuste la hauteur du bouton */
+  padding: 0;
+  /* supprime le padding */
+  margin: 0 5px;
+  /* ajoute une marge horizontale autour des boutons */
 }
 
 .item-info {
@@ -44,11 +56,7 @@ h1 {
 }
 
 .item-image img {
-<<<<<<< Updated upstream
   width: 60%; /* adjust as needed */
-=======
-  width: 50%; /* adjust as needed */
->>>>>>> Stashed changes
   height: auto;
 }
 

@@ -43,7 +43,14 @@ export const store = createStore({
 
     clearCart(state) {
       state.cart = [];
-    }
+    },
+    UPDATE_QUANTITY(state, { item, quantity }) {
+      const cartItem = state.cart.find(i => i.type === item.type);
+      if (cartItem) {
+        cartItem.quantity = quantity;
+      }
+    },
+
   },
   actions: {
     addToCart(context, item) {
@@ -54,6 +61,9 @@ export const store = createStore({
     },
     updateItemQuantity(context, {item, quantity}) {
       context.commit('updateItemQuantity', {item, quantity})
-    }
+    },
+    updateQuantity({ commit }, { item, quantity }) {
+      commit('UPDATE_QUANTITY', { item, quantity });
+    },
   },
 })
