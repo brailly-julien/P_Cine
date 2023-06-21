@@ -37,6 +37,7 @@ const messages = {
     bass: 'Bass',
     low: 'Low',
     high: 'High',
+    cartempty: 'Your cart is empty',
   },
   fr: {
     welcome: 'Bonjour,',
@@ -73,6 +74,7 @@ const messages = {
     bass: 'Basse',
     low: 'Grave',
     high: 'Aigu',
+    cartempty: 'Vous n\'avez rien dans votre panier.'
   },
 };
 

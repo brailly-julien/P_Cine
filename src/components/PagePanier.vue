@@ -3,8 +3,8 @@
     <router-link to="/PageRestauration">
       <img src="../assets/back.png" alt="{{ $t('return') }}" class="back-button"/>
     </router-link>
-    <h1>Panier</h1>
-    <p v-if="isCartEmpty">Vous n'avez rien dans votre panier.</p>
+    <h1>{{ $t('cart') }}</h1>
+    <p v-if="isCartEmpty">{{ $t('cartempty') }}</p>
 
     <ul class="cart-list" v-else>
       <li v-for="(item, index) in cartItems" :key="index" class="cart-item">
