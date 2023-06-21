@@ -4,14 +4,7 @@
     align-items: center;
     padding: 10px;
     font-size: 20px;
-}
-
-.header {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    justify-content: start;
-    align-items: center;
-    width: 100%;
+    position: relative;
 }
 
 .back-button {

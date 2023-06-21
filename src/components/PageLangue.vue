@@ -1,11 +1,9 @@
 <template>
   <div class="page-langue">
-    <div class="header">
         <router-link to="/PageSetup">
           <img src="../assets/back.png" alt="Retour" class="back-button"/>
         </router-link>
         <h1>Choisissez votre langue</h1>
-    </div>
   
       <div class="button-container">
         <!-- Ici sont les boutons de langue -->
