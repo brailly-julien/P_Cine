@@ -4,12 +4,8 @@
       <img src="../assets/back.png" alt="{{ $t('return') }}" class="back-button"/>
     </router-link>
     <router-link to="/pagepanier">
-<<<<<<< Updated upstream
       <img src="../assets/cart.png" alt="Panier" class="panier-button"/>
       <div class="panier-quantity" v-if="totalQuantity > 0">{{ totalQuantity }}</div>
-=======
-      <img src="../assets/cart.png" alt="{{ $t('cart') }}" class="panier-button"/>
->>>>>>> Stashed changes
     </router-link>
 
     <h1>{{ $t('restauration') }}</h1>
