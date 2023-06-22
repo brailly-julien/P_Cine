@@ -1,4 +1,6 @@
 # cine-project
+Liens vers la documentations (fonctionnelle, technique, utilisation):
+https://docs.google.com/document/d/1bKMKZDuLtOawa-zzCsLcbkbz_aco78zY2qv5-rmk5uA/edit?usp=sharing
 
 ## Project setup
 ```
