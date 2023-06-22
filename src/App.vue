@@ -1,16 +1,14 @@
 <template>
   <div id="app">
     <div class="container">
-      <router-link to="/">
         <img alt="Vue logo" src="./assets/logo2.png" class="logo">
-      </router-link>
       <div class="lang-switch">
         <button @click="switchLocale('fr')">FR</button> |
         <button @click="switchLocale('en')">EN</button>
       </div>
       <router-view></router-view>
       <div v-if="tokenExpiresIn">
-        Le token expire dans : {{ tokenExpiresIn }} secondes
+        La session se termine dans : {{ tokenExpiresIn }} secondes
       </div>
     </div>
   </div>
