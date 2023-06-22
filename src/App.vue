@@ -8,7 +8,7 @@
       </div>
       <router-view></router-view>
       <div v-if="tokenExpiresIn">
-        La session se termine dans : {{ tokenExpiresIn }} secondes
+        {{ $t('timetoken') }} {{ tokenExpiresIn }} {{ $t('second') }}
       </div>
     </div>
   </div>
