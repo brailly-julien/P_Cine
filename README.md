@@ -9,6 +9,10 @@ npm install
 ```
 npm run serve
 ```
+### Serve deploiement
+```
+node .\server.js
+```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
