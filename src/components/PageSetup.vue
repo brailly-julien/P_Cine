@@ -45,7 +45,8 @@
     
     async created() {
     try {
-        const response = await axios.get('http://localhost:3000/seat/13B');
+        const chair = localStorage.getItem('chosenSeat');
+        const response = await axios.get(`http://localhost:3000/seat/${chair}`);
         this.user = response.data;
         this.userid = this.user.id;
         this.sliderValue = this.user.volume;  // initialiser le slider avec le volume de l'utilisateur

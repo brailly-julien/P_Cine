@@ -28,7 +28,8 @@ export default {
   },
   async created() {
     try {
-      const response = await axios.get('http://localhost:3000/seat/13B');
+      const chair = localStorage.getItem('chosenSeat');
+      const response = await axios.get(`http://localhost:3000/seat/${chair}`);
       this.user = response.data;
     } catch (error) {
       console.error(error);
