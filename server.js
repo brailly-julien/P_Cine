@@ -90,7 +90,7 @@ db.once('open', function() {
 });
 
 // Définition des modèles
-const User = mongoose.model('User', new mongoose.Schema({ id: String, firstname: String, lastname: String, pseudo: String, mail: String, soundProfile: String, language: String, volume: String, basse: Number, aigu: Number, grave: Number}));
+const User = mongoose.model('User', new mongoose.Schema({ id: String, firstname: String, lastname: String, pseudo: String, mail: String, soundProfile: String, language: String, volume: String, basse: Number, aigu: Number, grave: Number, credit: Number}));
 const Seat = mongoose.model('Seat', new mongoose.Schema({ id: String, id_user: String, id_movie: String}));
 const Movie = mongoose.model('Movie', new mongoose.Schema({ id: String, name: String, length: Number}));
 const Item = mongoose.model('Item', new mongoose.Schema({ id: String, name: String, type: String, tarif: String}));
@@ -109,6 +109,14 @@ app.get('/users', async (req, res) => {
     } catch (err) {
         res.status(500).send(err);
     }
+});
+app.get('/users/:id', async (req, res) => {
+  try {
+    const user = await User.findOne({ id: req.params.id }).select('id firstname lastname pseudo mail language credit -_id'); // récupérer les champs
+    res.send(user);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 app.put('/user/:id', async (req, res) => {
@@ -133,6 +141,9 @@ app.put('/user/:id', async (req, res) => {
           console.log(`Langue de l'utilisateur avant la mise à jour: ${user.language}`);
           user.language = req.body.language;
           console.log(`Langue de l'utilisateur mis à jour: `, user.language);
+      }
+      if (req.body.credit !== undefined) {
+        user.credit = req.body.credit;
       }
 
       if (req.body.grave !== undefined) {

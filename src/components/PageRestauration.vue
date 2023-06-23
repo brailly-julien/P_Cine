@@ -9,6 +9,9 @@
     </router-link>
 
     <h1>{{ $t('restauration') }}</h1>
+    <div class="user-credit">
+      Crédit : {{ userCredit }} €
+    </div>
 
     <div class="menu-container">
       <div class="item-container" v-bind:class="{ 'clicked': clickedItem === 'pizza' }">
@@ -41,21 +44,37 @@ export default {
     return {
       items: [],
       clickedItem: null,
+      user: null,
       quantities: {
         pizza: 0,
         boisson: 0,
         popcorn: 0
-      }
+      },
+      userCredit: 0
     }
   },
   async created() {
-    try {
-      const response = await axios.get('http://localhost:3000/items');
-      this.items = response.data;
-    } catch (err) {
-      console.error(err);
+  try {
+    const responseItems = await axios.get('http://localhost:3000/items');
+    this.items = responseItems.data;
+    
+    const chair = localStorage.getItem('chosenSeat');
+    const responseSeat = await axios.get(`http://localhost:3000/seat/${chair}`);
+    this.userId = responseSeat.data.id;
+
+    if (!this.userId) {
+      alert("Veuillez vous identifier avant de passer une commande.");
+      return;
     }
-  },
+    const responseUser = await axios.get(`http://localhost:3000/users/${this.userId}`);
+    this.userCredit = responseUser.data.credit;
+
+  } catch (err) {
+    console.error(err);
+  }
+},
+
+
   computed: {
     totalQuantity() {
       return this.$store.state.cart.reduce((total, item) => total + item.quantity, 0);
