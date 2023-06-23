@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 const http = require('http');
 const { Server } = require('socket.io');
+const { v4: uuidv4 } = require('uuid');
 
 const jwt = require('jsonwebtoken');
 
@@ -18,7 +19,7 @@ const io = new Server(server, {
 app.use(cors());
 app.use(express.json()); // Ajouter cette ligne
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://192.168.1.17:8080');
+    res.header('Access-Control-Allow-Origin', 'http://192.168.1.7:8080');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
@@ -92,6 +93,8 @@ db.once('open', function() {
 const User = mongoose.model('User', new mongoose.Schema({ id: String, firstname: String, lastname: String, pseudo: String, mail: String, soundProfile: String, language: String, volume: String, basse: Number, aigu: Number, grave: Number}));
 const Seat = mongoose.model('Seat', new mongoose.Schema({ id: String, id_user: String, id_movie: String}));
 const Movie = mongoose.model('Movie', new mongoose.Schema({ id: String, name: String, length: Number}));
+const Item = mongoose.model('Item', new mongoose.Schema({ id: String, name: String, type: String, tarif: String}));
+const Cart = mongoose.model('Cart', new mongoose.Schema({ id: String, id_user: String, prixttc: String}));
 
 
 app.get('/', (req, res) => {
@@ -170,6 +173,22 @@ app.get('/movies', async (req, res) => {
       res.status(500).send(err);
   }
 });
+app.get('/items', async (req, res) => {
+  try {
+      const items = await Item.find().select('id name type tarif -_id'); // récupérer les champs
+      res.send(items);
+  } catch (err) {
+      res.status(500).send(err);
+  }
+});
+app.get('/carts', async (req, res) => {
+  try {
+      const carts = await Cart.find().select('id id_user prixttc -_id'); // récupérer les champs
+      res.send(carts);
+  } catch (err) {
+      res.status(500).send(err);
+  }
+});
 
 app.get('/seat/:id', async (req, res) => {
   try {
@@ -184,6 +203,34 @@ app.get('/seat/:id', async (req, res) => {
       res.status(500).send(err);
   }
 });
+
+
+app.post('/carts', async (req, res) => {
+  const { id_user, prixttc } = req.body;
+
+  // Générez un identifiant de facture unique
+  const invoiceId = uuidv4();
+
+  // Créez une nouvelle commande
+  const newCart = new Cart({
+    id: invoiceId,
+    id_user,
+    prixttc
+  });
+
+  try {
+    // Enregistrez la commande dans la base de données
+    await newCart.save();
+    res.status(200).send({ message: 'Commande sauvegardée', invoiceId: invoiceId });
+  } catch (error) {
+    console.error('Erreur lors de l\'enregistrement de la commande dans la base de données :', error);
+    res.status(500).send('Erreur serveur');
+  }
+});
+
+
+
+
   const port = 3000;
   server.listen(port, '0.0.0.0', () => {
       console.log(`Server is running on port ${port}`);
