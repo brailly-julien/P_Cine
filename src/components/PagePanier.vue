@@ -4,7 +4,7 @@
       <img src="../assets/back.png" alt="{{ $t('return') }}" class="back-button"/>
     </router-link>
     <h1>{{ $t('cart') }}</h1>
-      Crédit : {{ userCredit }} €
+      
     <p v-if="isCartEmpty">{{ $t('cartempty') }}</p>
 
     <ul class="cart-list" v-else>

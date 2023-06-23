@@ -19,7 +19,7 @@ const io = new Server(server, {
 app.use(cors());
 app.use(express.json()); // Ajouter cette ligne
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://192.168.1.7:8080');
+    res.header('Access-Control-Allow-Origin', 'http://192.168.1.17:8080');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
